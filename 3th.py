@@ -10,9 +10,13 @@
 ##                
 ######################################################################
 
+#答案linkedlist
+
 import re 
 
 f=open("sources/3.txt","r")
 text=f.read()
 text.strip()
-text
+
+p=re.compile(r'[a-z][A-Z]{3}([a-z])[A-Z]{3}[a-z]')
+print p.findall(text)
