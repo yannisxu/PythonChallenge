@@ -10,10 +10,12 @@
 ##                
 ######################################################################
 
-#46145是最有一个文件，得到提示：Collect the comments.
+#第一部分为46145是最有一个文件，得到提示：Collect the comments.
+#第二部分出现的图形为 HOCKEY 得到链接的下一句话是 it's in the air look at the letters，所以最终结果就是 拼出这些图形的字母：oxygen
 
 import os,sys
 import re 
+import zipfile
 
 
 list = os.walk("sources/channel/")
@@ -35,3 +37,19 @@ for i in range(filenum):
     for i in start:
         startnum = i
         print startnum
+
+
+zf = zipfile.ZipFile("sources/channel.zip")
+
+id = "90052"
+out = ""
+while 1:
+    text = zf.read("%s.txt" % id)
+    match = re.compile("Next nothing is (\d*)").search(text)
+    if match:
+        out += zf.getinfo("%s.txt" % id).comment 
+        id = match.group(1)
+    else:
+        break
+
+print out 
