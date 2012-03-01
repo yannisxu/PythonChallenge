@@ -39,23 +39,33 @@ second = [156,141,165,135,169,131,176,130,187,134,191,140,191,146,186,150,179,15
 158,121,157,128,156,134,157,136,156,136]
 
 img = Image.open("sources/good.jpg")
+pic = Image.new(img.mode, img.size)
 
 #输出图片的模式和大小
 print(img.mode)
 print(img.size)
 
-for i in range(0, img.size[0]):
-    for j in range(0, img.size[1]):
-        img.putpixel((i,j),(255,255,255))
+#for i in range(0, img.size[0]):
+#    for j in range(0, img.size[1]):
+#        img.putpixel((i,j),(255,255,255))
 
 #第一第二的像素设置为红色
-for i in range(0,len(first), 2):
-    xy = (first[i], first[i+1])
-    img.putpixel(xy, (255,0,0))
+#for i in range(0,len(first), 2):
+#    xy = (first[i], first[i+1])
+#    img.putpixel(xy, (255,0,0))
 
 
-for i in range(0, len(second), 2):
-    xy = (second[i], second[i+1])
-    img.putpixel(xy, (255,0,0))
+#for i in range(0, len(second), 2):
+#    xy = (second[i], second[i+1])
+#    img.putpixel(xy, (255,0,0))
 
-img.show()
+first, second = map(
+    lambda seq: [seq[i:i+2] for i in range(0, len(seq), 2)],
+    (first, second)
+)
+
+for elt in (first, second):
+    for x, y in elt:
+        pic.putpixel((x,y), (255, 255, 255))
+
+pic.save("sources/goodbeta.jpg")
