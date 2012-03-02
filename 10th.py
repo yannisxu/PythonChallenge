@@ -16,25 +16,30 @@
 import string
 
 startstr = "1"
-temp = ""
-count = 1
+count = 0
 newstr = ""
 
 for i in range(30):
+    temp = startstr[0]
     for j in startstr:
         if temp == j:
             count += 1
         else:
-            temp = j
+            if count == 0:
+                count += 1
             newstr += str(count)
             newstr += temp
-            count = 0
+            count = 1
             temp = j
-
-    if count > 0:
-        newstr += str(count)
-        newstr += temp
             
+    newstr += str(count)
+    newstr += temp
+    count = 0
+        
     print "第 %d 次循环" %(i)
     print newstr
     startstr = newstr
+    newstr = ""
+
+print "结果为"
+print len(startstr)
